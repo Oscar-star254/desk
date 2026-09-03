@@ -1,0 +1,17 @@
+[build]
+  functions = "netlify/functions"
+  # No static site build needed — this repo only hosts the API functions.
+  # If you want Netlify to also host desk.html itself, set publish to the
+  # folder containing it (e.g. "public") and drop desk.html in there.
+  publish = "public"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Allow the desk.html app (hosted anywhere) to call these functions.
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
